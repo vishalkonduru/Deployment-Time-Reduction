@@ -1,0 +1,33 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Arial, Helvetica, sans-serif; background: #f3f5f9; color: #1f2937; }
+.container { max-width: 900px; margin: 0 auto; padding: 24px 16px; }
+header.topbar { background: #1e3a8a; color: #fff; padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; }
+header.topbar h1 { margin: 0; font-size: 20px; }
+.card { background: #fff; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+.card h2 { margin-top: 0; font-size: 18px; }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 10px; border-bottom: 1px solid #e5e7eb; }
+th { background: #f9fafb; font-size: 14px; }
+label { display: block; margin: 12px 0 4px; font-weight: bold; font-size: 14px; }
+input, select, textarea { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; font-family: inherit; }
+textarea { min-height: 80px; resize: vertical; }
+button { padding: 10px 18px; border: none; border-radius: 6px; font-size: 14px; cursor: pointer; background: #2563eb; color: #fff; margin-top: 12px; }
+button:hover { opacity: .9; }
+button.accept { background: #16a34a; }
+button.reject { background: #dc2626; margin-left: 8px; }
+button.logout { background: transparent; border: 1px solid #fff; margin: 0; }
+.error { color: #dc2626; margin-top: 12px; min-height: 20px; }
+.success { color: #16a34a; margin-top: 12px; min-height: 20px; }
+.low { color: #dc2626; font-weight: bold; }
+.muted { color: #6b7280; font-size: 14px; }
+.badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: bold; text-transform: capitalize; }
+.badge.pending { background: #fef3c7; color: #92400e; }
+.badge.accepted { background: #dcfce7; color: #166534; }
+.badge.rejected { background: #fee2e2; color: #991b1b; }
+.request-item { border-top: 1px solid #e5e7eb; padding: 14px 0; }
+.request-item:first-child { border-top: none; }
+.request-item p { margin: 6px 0; }
+.reply { background: #f3f4f6; border-radius: 6px; padding: 8px 12px; }
+.login-box { max-width: 380px; margin: 80px auto; }
+.login-box h1 { text-align: center; color: #1e3a8a; margin-top: 0; }
+.login-box button { width: 100%; }
