@@ -52,9 +52,10 @@ The GitHub Actions workflow is `.github/workflows/ci-cd.yml`.
 1. A push to `main` or pull request targeting `main` starts the workflow.
 2. GitHub Actions checks out the repository and installs Node.js dependencies.
 3. Jest automated tests run.
-4. Docker builds the application image. If tests or the Docker build fail, deployment does not start.
-5. For a push to `main`, the deploy job calls the Render Deploy Hook.
-6. Render builds the Dockerfile and deploys the new version. Render checks `/health` before marking the service healthy.
+4. If tests pass and the event is a push to `main`, the deploy job calls the Render Deploy Hook.
+5. Render builds the Dockerfile and deploys the new image. Render checks `/health` before marking the service healthy.
+
+The Dockerfile is also available for local builds. Render performs the production image build so the same image is not unnecessarily built twice in the automated path.
 
 Pull requests run tests and build the image but do not deploy to production.
 
