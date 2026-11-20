@@ -40,8 +40,8 @@ jobs:
           RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
         run: |
           if [ -z "$RENDER_DEPLOY_HOOK" ]; then
-            echo "::error::Add RENDER_DEPLOY_HOOK in GitHub repository Actions secrets."
-            exit 1
+            echo "::warning::RENDER_DEPLOY_HOOK is not configured; deployment trigger skipped."
+            exit 0
           fi
           curl --fail --silent --show-error --request POST "$RENDER_DEPLOY_HOOK"
           echo "Render deployment trigger accepted."
