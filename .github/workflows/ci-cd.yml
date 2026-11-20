@@ -9,7 +9,7 @@ on:
 
 jobs:
   test-and-build:
-    name: Run application tests
+    name: Run tests and build Docker image
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source code
@@ -25,6 +25,24 @@ jobs:
 
       - name: Run automated tests
         run: npm test -- --runInBand
+
+      - name: Read application version
+        id: version
+        run: echo "version=$(node -p \"require('./package.json').version\")" >> "$GITHUB_OUTPUT"
+
+      - name: Build versioned Docker image
+        run: docker build -t campusdesk:${{ steps.version.outputs.version }} .
+
+      - name: Export Docker image
+        run: docker save campusdesk:${{ steps.version.outputs.version }} -o campusdesk-image-${{ steps.version.outputs.version }}.tar
+
+      - name: Upload Docker image artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: campusdesk-docker-image-${{ steps.version.outputs.version }}
+          path: campusdesk-image-${{ steps.version.outputs.version }}.tar
+          if-no-files-found: error
+          retention-days: 30
 
 
   deploy:
