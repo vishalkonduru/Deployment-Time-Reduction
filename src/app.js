@@ -8,6 +8,8 @@ const MAX_TEXT_LENGTH = 500;
 
 function createApp() {
   const app = express();
+  // Render terminates HTTPS at its proxy; trust it so secure session cookies work.
+  if (process.env.NODE_ENV === 'production') app.set('trust proxy', 1);
   const store = createStore();
 
   app.use(express.json());
