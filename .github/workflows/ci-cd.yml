@@ -1,0 +1,47 @@
+name: CampusDesk CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test-and-build:
+    name: Test application and build Docker image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Run automated tests
+        run: npm test -- --runInBand
+
+      - name: Build Docker image
+        run: docker build -t campusdesk:${{ github.sha }} .
+
+  deploy:
+    name: Trigger Render deployment
+    needs: test-and-build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger deployment on Render
+        env:
+          RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$RENDER_DEPLOY_HOOK" ]; then
+            echo "::error::Add RENDER_DEPLOY_HOOK in GitHub repository Actions secrets."
+            exit 1
+          fi
+          curl --fail --silent --show-error --request POST "$RENDER_DEPLOY_HOOK"
+          echo "Render deployment trigger accepted."
