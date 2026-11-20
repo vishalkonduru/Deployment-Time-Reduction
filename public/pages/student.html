@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Student Portal - Student</title>
+  <link rel="stylesheet" href="/assets/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1 id="welcome">Student Portal</h1>
+    <button id="logout-btn" class="logout">Log out</button>
+  </header>
+  <div class="container">
+    <section class="card">
+      <h2>My Marks</h2>
+      <table><thead><tr><th>Subject</th><th>Marks</th><th>Out of</th></tr></thead><tbody id="marks-body"></tbody></table>
+    </section>
+    <section class="card">
+      <h2>My Attendance</h2>
+      <table><thead><tr><th>Subject</th><th>Classes attended</th><th>Percentage</th></tr></thead><tbody id="attendance-body"></tbody></table>
+    </section>
+    <section class="card">
+      <h2>Request a Marks Review</h2>
+      <form id="request-form">
+        <label for="subject">Subject</label><select id="subject" required></select>
+        <label for="reason">Reason</label><textarea id="reason" maxlength="500" required></textarea>
+        <button type="submit">Send request</button><p id="form-message"></p>
+      </form>
+    </section>
+    <section class="card"><h2>My Requests</h2><div id="request-list"></div></section>
+  </div>
+  <script src="/assets/common.js"></script>
+  <script src="/assets/student.js"></script>
+</body>
+</html>
